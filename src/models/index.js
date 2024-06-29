@@ -14,6 +14,13 @@ Category.hasMany(Product);
 Cart.belongsTo(User);
 User.hasMany(Cart);
 
-//Cart -> productId
+//Purchase -> productId
 Cart.belongsTo(Product);
 Product.hasMany(Cart);
+
+Purchase.belongsTo(User);
+User.hasMany(Purchase);
+
+//Purchase -> productId
+Purchase.belongsTo(Product);
+Product.hasMany(Purchase);

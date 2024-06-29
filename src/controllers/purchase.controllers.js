@@ -7,7 +7,16 @@ const getAll = catchError(async (req, res) => {
 });
 
 const create = catchError(async (req, res) => {
-  const result = await Purchase.create(req.body);
+  const userId = req.user.id;
+
+  const cart = await Cart.findAll({
+    where: { userId },
+    raw: true,
+    attributes: ["quantity", "userId", "productId"],
+  });
+
+  const result = await Purchase.bulkCreate(cart);
+  await Cart.destroy({ where: { userId } });
   return res.status(201).json(result);
 });
 
