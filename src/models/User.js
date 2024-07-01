@@ -24,8 +24,14 @@ const User = sequelize.define("user", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  //role: {
+  //  type: DataTypes.ENUM({
+  //    values: ["user", "admin"],
+  //  }),
+  //},
 });
 
+//se debe realizar este create
 User.beforeCreate(async (user) => {
   const password = user.password;
   const hashPassword = await bcrypt.hash(password, 10);

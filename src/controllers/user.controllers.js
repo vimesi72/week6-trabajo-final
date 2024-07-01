@@ -39,7 +39,7 @@ const update = catchError(async (req, res) => {
   if (result[0] === 0) return res.sendStatus(404);
   return res.json(result[1][0]);
 });
-
+//Creacion del Login
 const login = catchError(async (req, res) => {
   const { email, password } = req.body;
 
@@ -56,10 +56,17 @@ const login = catchError(async (req, res) => {
   return res.status(200).json({ user, token });
 });
 
+const logged = catchError(async (req, res) => {
+  const userId = req.user.id;
+  const result = await User.findByPk(userId);
+  return res.json(result);
+});
+
 module.exports = {
   getAll,
   create,
   remove,
   update,
   login,
+  logged,
 };

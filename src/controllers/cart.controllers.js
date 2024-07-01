@@ -10,12 +10,13 @@ const getAll = catchError(async (req, res) => {
     include: [
       {
         model: Product,
-        attributes: { exclude: ["createdAt","updatedAt"] }
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+        // attributes: ['title']
         include: [
           {
             model: Category,
-            attributes: [ 'name']
-          }
+            attributes: ["name"],
+          },
         ],
       },
     ],
@@ -24,9 +25,11 @@ const getAll = catchError(async (req, res) => {
 });
 
 const create = catchError(async (req, res) => {
+  console.log(req.body);
   const { quantity, productId } = req.body;
   const userId = req.user.id;
-
+  // const product = await Product.findByPk(productId)
+  //if (!product) return res.sendStatus(404)
   const body = { userId, quantity, productId };
   const result = await Cart.create(body);
   return res.status(201).json(result);
@@ -34,12 +37,30 @@ const create = catchError(async (req, res) => {
 
 const getOne = catchError(async (req, res) => {
   const { id } = req.params;
-  const result = await Cart.findByPk(id);
+  const userId = req.user.id;
+  const result = await Cart.findByPk(id, {
+    where: { userId },
+    include: [
+      {
+        model: Product,
+        attributes: { eclude: ["createdAt", "updatedAt"] },
+        //attributes: ['title']
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+          },
+        ],
+      },
+    ],
+  });
   if (!result) return res.sendStatus(404);
   return res.json(result);
 });
 
 const remove = catchError(async (req, res) => {
+  //quantity, productId, userId, id, times
+  if (!result) return res.sendStatus(404);
   const { id } = req.params;
   const result = await Cart.destroy({ where: { id, userId: req.user.id } });
   if (!result) return res.sendStatus(404);
@@ -48,10 +69,11 @@ const remove = catchError(async (req, res) => {
 
 const update = catchError(async (req, res) => {
   const userId = req.user.id;
+  //quantity, productId, userId, id, times
   const { id } = req.params;
   const { quantity } = req.body;
   const result = await Cart.update(
-    { quantity },
+    { quantity }, //quantity, productId, userId
     { where: { id, userId }, returning: true }
   );
   if (result[0] === 0) return res.sendStatus(404);

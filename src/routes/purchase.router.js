@@ -4,6 +4,6 @@ const { verifyJwt } = require("../utils/verifyJWT");
 
 const routerPurchase = express.Router();
 
-routerPurchase.route("/").get(verifyJwt, getAll).post(verifyJwt, create);
+routerPurchase.route("/").get(getAll).post(create);
 
 module.exports = routerPurchase;

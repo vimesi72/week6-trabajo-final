@@ -5,9 +5,9 @@ const Cart = sequelize.define("cart", {
   quantity: {
     type: DataTypes.DECIMAL,
     allowNull: false,
-  }
+  },
   //productId
-  //userId -> se lo obtiene del req.user.id
+  //userId -> se debe crear 2 relaciones en index.js de models
 });
 
 module.exports = Cart;

@@ -1,23 +1,23 @@
 const Cart = require("./Cart");
 const Category = require("./Category");
 const Product = require("./Product");
+const Purchase = require("./Purchase");
 const User = require("./User");
 
-require("./User");
-require("./Category");
-
+//Ingresar las relaciones entre Product-Category, Car/User/Product, Purchase/User/Product
 //Product -> categoryId
-Product.belongsToMany(Category);
-Category.hasMany(Product);
+Product.belongsTo(Category);
+Category.hasMany(Product); // relacion 1:n
 
 //Cart-> userId
-Cart.belongsTo(User);
-User.hasMany(Cart);
+Cart.belongsTo(User); //relacion 1:1
+User.hasMany(Cart); //relacion 1:n
 
 //Purchase -> productId
 Cart.belongsTo(Product);
 Product.hasMany(Cart);
 
+//Purchase -> userId
 Purchase.belongsTo(User);
 User.hasMany(Purchase);
 
