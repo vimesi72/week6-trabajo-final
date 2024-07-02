@@ -10,14 +10,14 @@ const getAll = catchError(async (req, res) => {
 
 const create = catchError(async (req, res) => {
   //Las columnas del modelo
-  //productId -> vamos hacer un endpoint
-  //URL
   //FILENAME
+  //URL
+  //productId -> vamos hacer un endpoint
 
   const { filename } = req.file;
   //console.log(filename);
   //console.log(req.protocol); //http
-  //console.group(req.headers.host); //localhost:8088/public/uploads
+  //console.log(req.headers.host); //localhost:8080/public/uploads
   const imageDB = await ProductImg.findOne({ where: { filename } });
   if (imageDB) return res.sendStatus(404);
 

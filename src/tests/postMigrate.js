@@ -4,7 +4,7 @@ const sequelize = require("../utils/connection");
 const testMigrate = async () => {
   try {
     await sequelize.sync({ force: true });
-    console.log("DB connected 👊👍");
+    console.log("DB reset ✔");
 
     process.exit();
   } catch (error) {
