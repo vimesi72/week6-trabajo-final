@@ -25,7 +25,6 @@ const getAll = catchError(async (req, res) => {
 });
 
 const create = catchError(async (req, res) => {
-  console.log(req.body);
   const { quantity, productId } = req.body;
   const userId = req.user.id;
   // const product = await Product.findByPk(productId)
@@ -43,7 +42,7 @@ const getOne = catchError(async (req, res) => {
     include: [
       {
         model: Product,
-        attributes: { eclude: ["createdAt", "updatedAt"] },
+        attributes: { exclude: ["createdAt", "updatedAt"] },
         //attributes: ['title']
         include: [
           {
@@ -60,7 +59,6 @@ const getOne = catchError(async (req, res) => {
 
 const remove = catchError(async (req, res) => {
   //quantity, productId, userId, id, times
-  if (!result) return res.sendStatus(404);
   const { id } = req.params;
   const result = await Cart.destroy({ where: { id, userId: req.user.id } });
   if (!result) return res.sendStatus(404);

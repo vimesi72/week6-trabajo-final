@@ -4,7 +4,7 @@ const user = require("./createData/user");
 
 const testMigrate = async () => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
     console.log("DB connected 👊👍");
 
     await user();

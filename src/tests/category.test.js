@@ -7,6 +7,7 @@ const BASE_URL = "/api/v1/categories";
 const BASE_URL_AUTH = "/api/v1/users/login"; //para ruta login en users
 
 beforeAll(async () => {
+  //Inicio- Login
   const user = {
     email: "gael@gmail.com",
     password: "300572",

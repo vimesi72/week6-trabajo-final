@@ -5,6 +5,7 @@ const BASE_URL = "/api/v1/users";
 let TOKEN, userId;
 
 beforeAll(async () => {
+  //Inicio- Login
   const body = {
     email: "gael@gmail.com",
     password: "300572",

@@ -8,8 +8,8 @@ const { verifyJwt } = require("../utils/verifyJWT");
 
 const routerProductImg = express.Router();
 
-routerProductImg.route("/").get(verifyJwt, getAll).post(verifyJwt, create);
+routerProductImg.route("/").get(getAll).post(create);
 
-routerProductImg.route("/:id").delete(verifyJwt, remove);
+routerProductImg.route("/:id").delete(remove);
 
 module.exports = routerProductImg;
