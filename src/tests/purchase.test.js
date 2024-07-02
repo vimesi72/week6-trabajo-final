@@ -3,7 +3,8 @@ const request = require("supertest");
 const app = require("../app");
 const Product = require("../models/Product");
 
-let TOKEN, product, cart, purchase, userId;
+let TOKEN, product, cart, purchase;
+let userId;
 
 const BASE_URL = "/api/v1/purchase";
 const BASE_LOGIN = "/api/v1/users/login";
