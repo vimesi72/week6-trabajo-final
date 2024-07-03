@@ -5,6 +5,7 @@ const Product = sequelize.define("product", {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   description: {
     type: DataTypes.STRING,
@@ -18,6 +19,9 @@ const Product = sequelize.define("product", {
     type: DataTypes.DECIMAL,
     allowNull: false,
   },
+  // brand: {
+  //  type: DataTypes.TEXT,
+  // },
   //stock: {
   //  type: Datatypes.INTEGER,
   //  allowNull: true,
